@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tour.js Demo</title>
+    <link rel="stylesheet" href="tour.css">
+    <style>
+      /* This is just demo CSS */
+      html {
+        height: 100%;
+      }
+      body {
+        min-height: 100%;
+      }
+      body, html {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+        position: relative;
+        text-align: center;
+      }
+      .test-1 {
+        float: right;
+        margin-top: 40px;
+        width: 200px;
+        height: 200px;
+        background-color: red;
+      }
+      .test-2 {
+        display: none;
+      }
+      .test-3 {
+        background-color: purple;
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        clear: right;
+        float: left;
+      }
+      .test-4 {
+        position: fixed;
+        top: 200px;
+        left: 200px;
+        background-color: green;
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+      }
+      .clear {
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="test-1">Square!</div>
+      <div class="test-2">This one will be skipped.</div>
+      <div class="test-3">Circle!</div>
+      <div class="test-4">Fixed element</div>
+      <div class="clear"><span class="test-5">Just some inline text.</span></div>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="tour.js"></script>
+    <script>
+        $(function () {
+            $('body').tour({
+              steps: [{
+                title: 'Welcome',
+                content: '<p>Hello! Welcome to Tour.js demo.</p>'
+              }, {
+                title: 'Simple Test',
+                content: '<p>This is an important area.</p>',
+                element: '.test-1',
+                position: 'top'
+              }, {
+                content: '<p>This one won\'t run because the element is not visible.</p>',
+                element: '.test-2'
+              }, {
+                content: '<p>No title<br>Unfortunately this library can only focus rectangles ):</p>',
+                element: '.test-3'
+              }, {
+                content: '<p>Fixed elements are no problem.</p>',
+                element: '.test-4'
+              }, {
+                content: '<p>Inline text</p>',
+                element: '.test-5'
+              }]
+            });
+
+            $('body').data('tour').start();
+
+            $('body').on('tourend', function () {
+              alert('Tour ended!');
+            });
+
+            $('body').on('stepchange', function (e, previousStep, nextStep) {
+              console.log(previousStep, nextStep);
+            });
+        });
+    </script>
+  </body>
+</html>
