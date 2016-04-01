@@ -294,7 +294,7 @@
         tooltipTop = targetMetrics.bottom;
         tooltipLeft = targetMetrics.left;
 
-        if (tooltipLeft + tooltipWidth > containerMetrics.height) {
+        if (tooltipLeft + tooltipWidth > containerMetrics.width) {
           tooltipLeft = targetMetrics.right - tooltipWidth;
           flipArrow = true;
         }
